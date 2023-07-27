@@ -74,10 +74,15 @@ K=4
 ids = np.argsort(distance)[:K]
 
 nearest_image = [(paths[id], distance[id], labels[id]) for id in ids]
+location = label_mapping.get(nearest_image[0][2], 'unknown')
+
 
 axes = []
 grid_size = int(math.sqrt(K))
 fig = plt.figure(figsize=(10,5))
+
+fig.suptitle(f"Địa điểm của bạn có thể là: {location}", fontsize=16)
+
 
 for id in range(K):
     draw_image = nearest_image[id]
@@ -85,6 +90,7 @@ for id in range(K):
 
     axes[-1].set_title(f"{label_mapping.get(draw_image[2], 'unknown')} - {draw_image[1]}")
     plt.imshow(Image.open(draw_image[0]))
+
 
 fig.tight_layout()
 plt.show()
