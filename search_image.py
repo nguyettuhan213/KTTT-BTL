@@ -13,6 +13,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+# Define the labels for images
+label_mapping = {
+    '1': 'C2',
+    '2': 'C4',
+    '3': 'C7',
+    '4': 'Cổng số 2 Đại Cồ Việt',
+    '5': 'Cổng số 1 Đại Cồ Việt',
+    '6': 'D3',
+    '7': 'D8',
+    '8': 'Đài phun nước',
+    '9': 'Cổng Parabol',
+    '10': 'C7',
+    '11': 'tào nhà viện Ngoại Ngữ',
+}
+
 #tạo model
 def get_extract_model():
   vgg16_model = VGG16(weights = "imagenet")
@@ -50,6 +65,7 @@ search_vector = extract_vector(model, search_image)
 #load data image
 vectors = pickle.load(open("vectors.pkl", "rb"))
 paths = pickle.load(open("paths.pkl", "rb"))
+labels = pickle.load(open("labels.pkl", "rb"))
 
 #Tính khoảng cách từ search_vector
 distance = np.linalg.norm(vectors - search_vector, axis=1)
@@ -57,7 +73,7 @@ distance = np.linalg.norm(vectors - search_vector, axis=1)
 K=4
 ids = np.argsort(distance)[:K]
 
-nearest_image = [(paths[id], distance[id]) for id in ids]
+nearest_image = [(paths[id], distance[id], labels[id]) for id in ids]
 
 axes = []
 grid_size = int(math.sqrt(K))
@@ -67,7 +83,7 @@ for id in range(K):
     draw_image = nearest_image[id]
     axes.append(fig.add_subplot(grid_size, grid_size, id+1))
 
-    axes[-1].set_title(draw_image[1])
+    axes[-1].set_title(f"{label_mapping.get(draw_image[2], 'unknown')} - {draw_image[1]}")
     plt.imshow(Image.open(draw_image[0]))
 
 fig.tight_layout()

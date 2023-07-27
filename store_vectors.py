@@ -1,5 +1,6 @@
 #import thư viện
 import os
+import re
 
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
@@ -34,6 +35,13 @@ def extract_vector(model, image_path):
   vector = vector/np.linalg.norm(vector)
   return vector
 
+
+def get_label(image_filename):
+    match = re.match(r'^(\d+)-', image_filename)
+    if match:
+      return match.group(1)
+    return 'Undefined'
+
 #định nghĩa thư mục data
 data_folder = 'BKImage'
 #khởi tạo model
@@ -41,19 +49,28 @@ model = get_extract_model()
 
 vectors = []
 paths = []
+labels = []
 
 for image_path in os.listdir(data_folder):
   image_path_full = os.path.join(data_folder, image_path)
   image_vector = extract_vector(model,image_path_full)
+  label = get_label(image_path)
+
   vectors.append(image_vector)
   paths.append(image_path_full)
+  labels.append(label)
+
 
 
 
 vector_file = "vectors.pkl"
 path_file = "paths.pkl"
+label_file = "labels.pkl"
+
 
 pickle.dump(vectors, open(vector_file, "wb"))
 pickle.dump(paths, open(path_file, "wb"))
+pickle.dump(labels, open(label_file, "wb"))
+
 
 
