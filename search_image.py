@@ -40,7 +40,7 @@ def extract_vector(model, image_path):
 
 
 # định nghĩa ảnh cần tìm kiếm
-search_image ='BKImage/Bản sao của IMG_20230714_095845.jpg'
+search_image ='BKImage/1-C2 (3).JPG'
 
 model = get_extract_model()
 
