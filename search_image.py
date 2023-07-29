@@ -18,14 +18,15 @@ label_mapping = {
     '1': 'C2',
     '2': 'C4',
     '3': 'C7',
-    '4': 'Cổng số 2 Đại Cồ Việt',
-    '5': 'Cổng số 1 Đại Cồ Việt',
+    '4': 'Cổng Đại Cồ Việt',
+    '5': 'C1',
     '6': 'D3',
     '7': 'D8',
     '8': 'Đài phun nước',
     '9': 'Cổng Parabol',
     '10': 'C7',
     '11': 'tào nhà viện Ngoại Ngữ',
+    '12': 'Thư viện Tạ Quang Bửu'
 }
 
 #tạo model
@@ -55,7 +56,7 @@ def extract_vector(model, image_path):
 
 
 # định nghĩa ảnh cần tìm kiếm
-search_image ='BKImage/1-C2 (3).JPG'
+search_image ='TestingImg/cong Parabol test.jpg'
 
 model = get_extract_model()
 
