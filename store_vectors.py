@@ -60,13 +60,9 @@ for image_path in os.listdir(data_folder):
   paths.append(image_path_full)
   labels.append(label)
 
-
-
-
 vector_file = "vectors.pkl"
 path_file = "paths.pkl"
 label_file = "labels.pkl"
-
 
 pickle.dump(vectors, open(vector_file, "wb"))
 pickle.dump(paths, open(path_file, "wb"))
