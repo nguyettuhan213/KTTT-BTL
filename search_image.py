@@ -56,7 +56,7 @@ def extract_vector(model, image_path):
 
 
 # định nghĩa ảnh cần tìm kiếm
-search_image ='TestingImg/cong Parabol test.jpg'
+search_image ='TestingImg/c1Test.jpg'
 
 model = get_extract_model()
 
